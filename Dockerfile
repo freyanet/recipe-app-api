@@ -7,9 +7,9 @@ LABEL maintainer="freyanet"
 ENV PYTHONUNDBUFFERED=1
 
 # Copiar archivos o carpetas desde tu maquina local al interior de la imagen:
-COPY ./recipe-app-api/requirements.txt /tmp/requirements.txt 
-COPY ./recipe-app-api/requirements.dev.txt /tmp/requirements.dev.txt
-COPY ./recipe-app-api/app /app
+COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./app /app
 
 # Fija el directorio de trabajo dentro del contenedor para los comandos siguientes:
 WORKDIR /app 
@@ -26,7 +26,7 @@ RUN python -m venv /py && \
     if [ "$DEV" = "true" ]; then \
         /py/bin/pip install -r /tmp/requirements.dev.txt; \
     fi && \
-rm -rf /tmp && \
+    rm -rf /tmp && \
     adduser \
         --disabled-password \
         --no-create-home \
